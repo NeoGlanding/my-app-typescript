@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { TodoInterface } from './interfaces/globalInterfaces';
+import InputForm from './components/InputForm';
 
 function App() {
+  let [todo, setTodo] = useState<string>("");
+  let [todos, setTodos] = useState<TodoInterface[]>([]);
+
+  React.useEffect(() => {
+    console.log(todos)
+  }, [todos])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Test App</p>
+      <InputForm 
+        todos={todos} 
+        setTodos={setTodos} 
+        todo={todo} 
+        setTodo={setTodo} 
+      />
+      {
+        todos.map(el => <li>{el.todo}</li>)
+      }
     </div>
   );
 }
